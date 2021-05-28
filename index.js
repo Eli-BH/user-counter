@@ -1,6 +1,6 @@
 const express = require("express");
-const RequestIp = require("@supercharge/request-ip");
-const hbs = require("hbs");
+require("hbs");
+const requestIp = require("request-ip");
 
 const port = process.env.PORT || 3001;
 const app = express();
@@ -10,7 +10,7 @@ app.set("view engine", "hbs");
 app.use(express.static(__dirname + "/public"));
 
 const ipMiddleware = (req, res, next) => {
-  req.ip = RequestIp.getClientIp(req);
+  req.ip = requestIp.getClientIp(req);
   next();
 };
 
