@@ -12,7 +12,7 @@ const ipMiddleware = (req, res, next) => {
 };
 
 app.get("/", ipMiddleware, (req, res) => {
-  if (ipLibrary.includes(req.ip)) return res.send(ipLibrary.length);
+  if (ipLibrary.includes(req.ip)) return res.send(ipLibrary.length.toString());
 
   ipLibrary.push(req.ip);
 
