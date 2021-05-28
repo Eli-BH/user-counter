@@ -7,6 +7,7 @@ const app = express();
 let ipLibrary = [];
 
 app.set("view engine", "hbs");
+app.use(express.static(__dirname + "/public"));
 
 const ipMiddleware = (req, res, next) => {
   req.ip = RequestIp.getClientIp(req);
