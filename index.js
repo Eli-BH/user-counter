@@ -24,20 +24,14 @@ const ipMiddleware = (req, res, next) => {
   next();
 };
 
-app.get("/", ipMiddleware, (req, res) => {
+app.get("/", ipMiddleware, async (req, res) => {
   try {
-    Count.findOneAndUpdate(
-      {},
-      { $inc: { visitCount: 1 } },
-      { new: true },
-      (err, data) => {
-        if (!err) {
-          res.render("page", { userCount: data.visitCount.toString() });
-        } else {
-          console.log(err);
-        }
-      }
-    );
+    const existingIp = await Count.findOne({ ip: req.ip });
+    if (!existingIp) await new Count({ ip: req.ip }).save();
+
+    const ipAmt = await Count.countDocuments();
+
+    res.render("page", { userCount: ipAmt });
   } catch (error) {
     console.log(error);
     res.status(500).send(error);
