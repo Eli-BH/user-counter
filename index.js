@@ -10,7 +10,7 @@ const ipMiddleware = (req, res, next) => {
 };
 
 app.get("/", ipMiddleware, (req, res) => {
-  res.send(req.ip);
+  res.send(`Your IP address is ${req.ip}`);
 });
 
 app.listen(port, () => {
