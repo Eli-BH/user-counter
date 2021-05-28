@@ -16,7 +16,7 @@ app.get("/", ipMiddleware, (req, res) => {
 
   ipLibrary.push(req.ip);
 
-  res.send(ipLibrary.length);
+  res.send(ipLibrary.length.toString());
 });
 
 app.listen(port, () => {
