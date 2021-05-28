@@ -4,7 +4,9 @@ const port = process.env.PORT || 3001;
 const app = express();
 
 const ipMiddleware = (req, res, next) => {
-  req.ip = RequestIp.getClientIp(req);
+  req.ip =
+    req.headers["x-forwarded-for"]?.split(",").pop().trim() ||
+    req.socket?.remoteAddress;
 
   next();
 };
