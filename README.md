@@ -1,5 +1,7 @@
 # user-counter
 
+![usage example](https://i.imgur.com/dS8q4e3.jpg)
+
 ## Table of Contents
 
 - [About](#about)
