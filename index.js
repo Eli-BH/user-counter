@@ -1,6 +1,6 @@
 const express = require("express");
 const RequestIp = require("@supercharge/request-ip");
-const port = 3001;
+const port = process.env.PORT || 3001;
 const app = express();
 
 const ipMiddleware = (req, res, next) => {
