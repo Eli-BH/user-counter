@@ -1,22 +1,26 @@
 const express = require("express");
 const RequestIp = require("@supercharge/request-ip");
+const hbs = require("hbs");
+
 const port = process.env.PORT || 3001;
 const app = express();
-
 let ipLibrary = [];
+
+app.set("view engine", "hbs");
 
 const ipMiddleware = (req, res, next) => {
   req.ip = RequestIp.getClientIp(req);
-
   next();
 };
 
 app.get("/", ipMiddleware, (req, res) => {
-  if (ipLibrary.includes(req.ip)) return res.send(ipLibrary.length.toString());
+  let userCount = 0;
 
-  ipLibrary.push(req.ip);
+  if (!ipLibrary.includes(req.ip)) ipLibrary.push(req.ip);
 
-  res.send(ipLibrary.length.toString());
+  userCount = ipLibrary.length.toString();
+
+  res.render("page", { userCount: userCount });
 });
 
 app.listen(port, () => {

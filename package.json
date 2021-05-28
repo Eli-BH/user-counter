@@ -14,6 +14,7 @@
   "dependencies": {
     "@supercharge/request-ip": "^1.1.2",
     "express": "^4.17.1",
+    "hbs": "^4.1.2",
     "nodemon": "^2.0.7"
   }
 }
